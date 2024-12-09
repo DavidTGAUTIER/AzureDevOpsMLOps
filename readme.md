@@ -14,9 +14,9 @@ az group show <RG_NAME>
 ### install azure machine learning 
 az extension add -n ml --allow-preview true -y
 
-### in azure/azure ai/machine learning studio
-### in manage/compute : create a new compute that you need to insert in compute parameter in job.yml file
-### <COMPUTE_INSTANCE_NAME>
+* in azure/azure ai/machine learning studio
+* in manage/compute : create a new compute that you need to insert in compute parameter in job.yml file
+* <COMPUTE_INSTANCE_NAME>
 
 ### exec data asset (in /01 folder path)
 az ml data create --file yaml/data_asset.yml --workspace-name <WORKSPACE_NAME> --resource-group <RESOURCE_GROUP_NAME>
