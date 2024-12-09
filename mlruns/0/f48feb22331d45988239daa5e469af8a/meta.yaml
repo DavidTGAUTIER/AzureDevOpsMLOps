@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/dtiffeneau-gautier/OneDrive%20-%20EXPERTIME/Bureau/david/en-cours/projets/projet%20CICD/Azure%20MLOps/Labs%2001/01/mlruns/0/f48feb22331d45988239daa5e469af8a/artifacts
+end_time: 1733741443989
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: f48feb22331d45988239daa5e469af8a
+run_name: puzzled-toad-276
+run_uuid: f48feb22331d45988239daa5e469af8a
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1733741432968
+status: 3
+tags: []
+user_id: dtiffeneau-gautier

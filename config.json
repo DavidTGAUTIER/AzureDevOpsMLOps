@@ -1,0 +1,4 @@
+{
+    "reg_rate": 0.01,
+    "training_data": "./data"
+  }

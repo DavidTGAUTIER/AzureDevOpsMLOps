@@ -1,0 +1,12 @@
+$schema: https://azuremlschemas.azureedge.net/latest/commandJob.schema.json
+code: ..
+command: >-
+  python train.py  # Le fichier Python que vous avez modifié
+inputs:
+  training_data:
+    type: uri_folder
+    path: azureml:diabetes-dev-folder@latest
+environment: azureml:AzureML-sklearn-0.24-ubuntu18.04-py37-cpu@latest
+compute: dtiffeneau-gautier1
+experiment_name: diabetes_classification_experiment
+description: Training a diabetes classification model

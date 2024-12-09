@@ -1,0 +1,7 @@
+numpy
+pandas
+matplotlib
+scikit-learn
+glob2
+argparse
+mlflow

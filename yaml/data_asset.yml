@@ -1,0 +1,5 @@
+$schema: https://azuremlschemas.azureedge.net/latest/data.schema.json
+name: diabetes-dev-folder
+description: Data folder containing diabetes dataset
+path: ../data
+type: uri_folder
