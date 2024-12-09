@@ -1,0 +1,15 @@
+$schema: https://azuremlschemas.azureedge.net/latest/commandJob.schema.json
+code: ../  # Le dossier racine "01"
+command: >
+  python train.py
+environment: azureml:AzureML-sklearn-0.24-ubuntu18.04-py37-cpu@latest
+compute: azureml:my-compute-cluster
+experiment_name: my-experiment
+inputs:
+  training_data:
+    type: uri_file
+    path: ./data/diabetes-dev.csv
+outputs:
+  model_output:
+    type: uri_folder
+    path: ./outputs
