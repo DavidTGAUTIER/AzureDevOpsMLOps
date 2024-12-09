@@ -14,7 +14,7 @@ jobs:
       with:
         fetch-depth: 0  # Télécharger tout le dépôt
 
-    # Étape 2 : Lister les repertoires
+    # Étape 2 : Lister les répertoires
     - name: List directory contents
       run: |
         ls -R ./  # Liste récursive de tout le contenu du projet pour vérifier la présence de diabetes-dev.csv
@@ -25,13 +25,37 @@ jobs:
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-    # Étape 4 : Installation de l'extension Azure ML CLI
+    # Étape 4 : Créer un Service Principal pour Azure ML
+    - name: Create Service Principal for Azure ML
+      run: |
+        # Créer le Service Principal avec un rôle Contributor sur le groupe de ressources spécifié
+        sp_output=$(az ad sp create-for-rbac --name github-aml-service-principal \
+          --role contributor \
+          --scopes /subscriptions/${{ secrets.AZURE_SUBSCRIPTION_ID }}/resourceGroups/${{ secrets.RESOURCE_GROUP }} \
+          --sdk-auth)
+        
+        # Exporter les informations du SP comme variables pour les utiliser dans le job
+        echo "##vso[task.setvariable variable=SP_OUTPUT;]$sp_output"
+
+    # Étape 5 : Installer l'extension Azure ML CLI
     - name: Install Azure ML CLI extension
       run: |
         az extension add --name ml -y
         az configure --defaults workspace=${{ secrets.AML_WORKSPACE }} group=${{ secrets.RESOURCE_GROUP }}
 
-    # Étape 5 : Soumission du job Azure ML
+    # Étape 6 : Se connecter avec le Service Principal
+    - name: Log in to Azure using the Service Principal
+      run: |
+        # Extraire les informations du Service Principal
+        echo "$(SP_OUTPUT)" > sp-credentials.json
+        SP_APP_ID=$(jq -r '.clientId' sp-credentials.json)
+        SP_PASSWORD=$(jq -r '.clientSecret' sp-credentials.json)
+        SP_TENANT=$(jq -r '.tenantId' sp-credentials.json)
+        
+        # Se connecter via le Service Principal
+        az login --service-principal --username $SP_APP_ID --password $SP_PASSWORD --tenant $SP_TENANT
+
+    # Étape 7 : Soumission du job Azure ML
     - name: Submit Azure ML job
       run: |
         az ml job create --file ./job-definition.yml --resource-group ${{ secrets.RESOURCE_GROUP }} --workspace-name ${{ secrets.AML_WORKSPACE }}
