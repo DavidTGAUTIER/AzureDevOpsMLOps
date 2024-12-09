@@ -1,5 +1,5 @@
 $schema: https://azuremlschemas.azureedge.net/latest/commandJob.schema.json
-code: ../  # Le dossier racine "01"
+code: ./  # La racine du dépôt
 command: >
   python train.py
 environment: azureml:AzureML-sklearn-0.24-ubuntu18.04-py37-cpu@latest
