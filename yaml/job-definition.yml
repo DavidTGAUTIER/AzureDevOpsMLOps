@@ -8,7 +8,7 @@ experiment_name: my-experiment
 inputs:
   training_data:
     type: uri_file
-    path: ../../data/diabetes-dev.csv
+    path: /home/runner/work/AzureDevOpsMLOps/AzureDevOpsMLOps/data/diabetes-dev.csv
 outputs:
   model_output:
     type: uri_folder
