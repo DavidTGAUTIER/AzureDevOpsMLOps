@@ -7,8 +7,8 @@ compute: azureml:my-compute-cluster
 experiment_name: my-experiment
 inputs:
   training_data:
-    type: uri_file
-    path: /home/runner/work/AzureDevOpsMLOps/AzureDevOpsMLOps/data/diabetes-dev.csv
+    type: uri_folder
+    path: azureml:diabetes-dev-folder@latest
 outputs:
   model_output:
     type: uri_folder

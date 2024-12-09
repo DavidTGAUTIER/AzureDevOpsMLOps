@@ -24,6 +24,12 @@ az ml data create --file yaml/data_asset.yml --workspace-name <WORKSPACE_NAME> -
 ### exec job (in /01 folder path)
 az ml job create --file yaml/job.yml --resource-group <RESOURCE_GROUP> --workspace-name <WORKSPACE_NAME>
 
+### show job
+az ml job show --name <JOB_NAME> --resource-group <RESOURCE_GROUP_NAME> --workspace-name <WORKSPACE_NAME>
+
+### show datastore
+az ml datastore list --workspace-name <WORKSPACE_NAME> --resource-group <RESOURCE_GROUP_NAME>
+
 ### create service principal with RBAC roles
   az ad sp create-for-rbac --name "<service-principal-name>" \
     --role contributor \

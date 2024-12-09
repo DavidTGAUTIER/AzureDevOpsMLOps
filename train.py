@@ -17,16 +17,10 @@ def main():
     # Enable autologging
     mlflow.autolog()
 
-    # Read data
     df = get_csvs_df(config['training_data'])
-
-    # Split data
     X_train, X_test, y_train, y_test = split_data(df)
-
-    # Train model
     model = train_model(config['reg_rate'], X_train, X_test, y_train, y_test)
 
-    # Evaluate model
     evaluate_model(model, X_test, y_test)
 
 def load_config():
