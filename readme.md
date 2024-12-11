@@ -18,6 +18,21 @@ az extension add -n ml --allow-preview true -y
 * in manage/compute : create a new compute that you need to insert in compute parameter in job.yml file
 * <COMPUTE_INSTANCE_NAME>
 
+### create compute cluster
+az ml compute create \
+  --name <nom_du_cluster> \
+  --size <type_de_machine> \
+  --min-instances <nombre_minimum_d_instances> \
+  --max-instances <nombre_maximum_d_instances> \
+  --resource-group <nom_du_groupe_de_ressources> \
+  --workspace-name <nom_de_l_espace_de_travail> \
+  --type amlcompute
+
+### check compute cluster
+az ml compute list \
+  --resource-group <resource-group> \
+  --workspace-name <workspace-name>
+
 ### exec data asset (in /01 folder path)
 az ml data create --file yaml/data_asset.yml --workspace-name <WORKSPACE_NAME> --resource-group <RESOURCE_GROUP_NAME>
 
@@ -55,12 +70,21 @@ az ml workspace update --name <nom-du-workspace-aml> \
     --resource-group <nom-du-groupe-de-ressources> \
     --add assigned_user=<client-id-du-service-principal>
 
-### RBAC on service principal
+### RBAC on service principal to aml_workspace
 ### <sub_id> : az account show and go to "id" under "homeTenantId"
 az role assignment create \
   --assignee <client-id-du-service-principal> \
   --role Contributor \
   --scope /subscriptions/<sub_id>/resourceGroups/d<rg_name>/providers/Microsoft.MachineLearningServices/workspaces/<aml_workspace_name>
+
+### RBAC list
+az role assignment list --assignee <service-principal-id> \
+  --scope /subscriptions/<subscription-id>/resourceGroups/<resource-group>/providers/Microsoft.MachineLearningServices/workspaces/<workspace-name>/computes/<compute-name>
+
+### RBAC on service principal to compute instance
+az role assignment create --assignee <service-principal-id> \
+  --role Contributor \ 
+  --scope /subscriptions/<subscription-id>/resourceGroups/<resource-group>/providers/Microsoft.MachineLearningServices/workspaces/<workspace-name>/computes/<compute-name>
 
 
 
