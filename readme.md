@@ -56,15 +56,20 @@ az ad sp list --display-name "<service-principal-name>" --query "[].appId" -o ts
 
 -----------------
 
-git checkout master
-git pull origin master
-git checkout -b feature/dev
+git checkout master</br>
+git pull origin master</br>
+git checkout -b feature/dev</br>
 
-git add .
-git commit -m 'blabla'
+git add .</br>
+git commit -m 'blabla'</br>
 git push origin feature/dev
 
 -----------------
+
+-----------------
+
+### for manual-trigger2.yml
+
 
 ## OPTIONAL
 
