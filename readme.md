@@ -54,11 +54,22 @@ az ad sp create-for-rbac --name "<service-principal-name>" \
 ### show <client-id-du-service-principal>
 az ad sp list --display-name "<service-principal-name>" --query "[].appId" -o tsv
 
+-----------------
+
+git checkout master
+git pull origin master
+git checkout -b feature/dev
+
+-----------------
+
+## OPTIONAL
+
 ### add service principal to assigned user
-az ml compute update --name <nom-de-l-instance-de-calcul> \
-    --resource-group <nom-du-groupe-de-ressources> \
-    --workspace-name <nom-du-workspace-aml> \
-    --add assigned_user=<client-id-du-service-principal>
+az ml compute update 
+  --name <nom-de-l-instance-de-calcul> \
+  --resource-group <nom-du-groupe-de-ressources> \
+  --workspace-name <nom-du-workspace-aml> \
+  --add assigned_user=<client-id-du-service-principal>
 
 ### show if compute instance is ok
 az ml compute show --name <nom-de-l-instance-de-calcul> \
@@ -67,8 +78,8 @@ az ml compute show --name <nom-de-l-instance-de-calcul> \
 
 ### add user to azure ml workspace
 az ml workspace update --name <nom-du-workspace-aml> \
-    --resource-group <nom-du-groupe-de-ressources> \
-    --add assigned_user=<client-id-du-service-principal>
+  --resource-group <nom-du-groupe-de-ressources> \
+  --add assigned_user=<client-id-du-service-principal>
 
 ### RBAC on service principal to aml_workspace
 ### <sub_id> : az account show and go to "id" under "homeTenantId"
