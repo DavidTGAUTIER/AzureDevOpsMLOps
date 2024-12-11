@@ -39,3 +39,7 @@ jobs:
         az ml job create --file ./job-definition.yml \
         --resource-group ${{ secrets.RESOURCE_GROUP }} \
         --workspace-name ${{ secrets.AML_WORKSPACE }}
+
+    - name: Placeholder
+      run: |
+        echo "Will add code checks here in next challenge"
