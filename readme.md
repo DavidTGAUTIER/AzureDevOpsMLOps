@@ -60,6 +60,10 @@ git checkout master
 git pull origin master
 git checkout -b feature/dev
 
+git add .
+git commit -m 'blabla'
+git push origin feature/dev
+
 -----------------
 
 ## OPTIONAL
