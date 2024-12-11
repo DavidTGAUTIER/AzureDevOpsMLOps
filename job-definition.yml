@@ -12,4 +12,4 @@ inputs:
 outputs:
   model_output:
     type: uri_folder
-    path: ./outputs
+    path: azureml:diabetes-dev-folder@latest
