@@ -31,7 +31,38 @@ az ml job show --name <JOB_NAME> --resource-group <RESOURCE_GROUP_NAME> --worksp
 az ml datastore list --workspace-name <WORKSPACE_NAME> --resource-group <RESOURCE_GROUP_NAME>
 
 ### create service principal with RBAC roles
-  az ad sp create-for-rbac --name "<service-principal-name>" \
-    --role contributor \
-    --scopes /subscriptions/<subscription-id>/resourceGroups/<your-resource-group-name> \
-    --sdk-auth
+az ad sp create-for-rbac --name "<service-principal-name>" \
+  --role contributor \
+  --scopes /subscriptions/<subscription-id>/resourceGroups/<your-resource-group-name> \
+  --sdk-auth
+
+### show <client-id-du-service-principal>
+az ad sp list --display-name "<service-principal-name>" --query "[].appId" -o tsv
+
+### add service principal to assigned user
+az ml compute update --name <nom-de-l-instance-de-calcul> \
+    --resource-group <nom-du-groupe-de-ressources> \
+    --workspace-name <nom-du-workspace-aml> \
+    --add assigned_user=<client-id-du-service-principal>
+
+### show if compute instance is ok
+az ml compute show --name <nom-de-l-instance-de-calcul> \
+ --resource-group <nom-du-groupe-de-ressources> \ 
+ --workspace-name <nom-du-workspace-aml>
+
+### add user to azure ml workspace
+az ml workspace update --name <nom-du-workspace-aml> \
+    --resource-group <nom-du-groupe-de-ressources> \
+    --add assigned_user=<client-id-du-service-principal>
+
+### RBAC on service principal
+### <sub_id> : az account show and go to "id" under "homeTenantId"
+az role assignment create \
+  --assignee <client-id-du-service-principal> \
+  --role Contributor \
+  --scope /subscriptions/<sub_id>/resourceGroups/d<rg_name>/providers/Microsoft.MachineLearningServices/workspaces/<aml_workspace_name>
+
+
+
+
+  
