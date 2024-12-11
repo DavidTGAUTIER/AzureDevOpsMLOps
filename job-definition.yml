@@ -12,4 +12,4 @@ inputs:
 outputs:
   model_output:
     type: uri_folder
-    path: wasb://azureml@dtgazureaisa.blob.core.windows.net/outputs/model
+    path: azureml://datastores/workspaceartifactstore/paths/outputs/model/
