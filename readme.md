@@ -54,17 +54,38 @@ az ad sp create-for-rbac --name "<service-principal-name>" \
 ### show <client-id-du-service-principal>
 az ad sp list --display-name "<service-principal-name>" --query "[].appId" -o tsv
 
------------------
+------------------
 
-git checkout master
-git pull origin master
-git checkout -b feature/dev
+git checkout master</br>
+git pull origin master</br>
+git checkout -b feature/dev</br>
 
-git add .
-git commit -m 'blabla'
+git add .</br>
+git commit -m 'blabla'</br>
 git push origin feature/dev
 
------------------
+------------------
+
+### Variables après avoir un créer un managed identity pour le clustered compute
+$MANAGED_IDENTITY_ID="<ID_DE_VOTRE_MANAGED_IDENTITY>"
+$STORAGE_ACCOUNT_NAME="<NOM_DU_COMPTE_DE_STOCKAGE>"
+$RESOURCE_GROUP="<GROUPE_DE_RESSOURCES_DU_COMPTE_DE_STOCKAGE>"
+
+# Récupérer l'ID du compte de stockage
+$STORAGE_ACCOUNT_ID=$(az storage account show --name $STORAGE_ACCOUNT_NAME --resource-group $RESOURCE_GROUP --query "id" -o tsv)
+
+### Assigner le rôle "Storage Blob Data Contributor" pour ECRITURE
+az role assignment create \
+  --assignee $MANAGED_IDENTITY_ID \
+  --role "Storage Blob Data Contributor" \
+  --scope $STORAGE_ACCOUNT_ID
+
+echo "Permissions assignées avec succès."
+
+------------------
+
+### for manual-trigger2.yml
+
 
 ## OPTIONAL
 
