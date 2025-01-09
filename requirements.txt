@@ -5,3 +5,5 @@ scikit-learn
 glob2
 argparse
 mlflow
+pytest
+flake8
