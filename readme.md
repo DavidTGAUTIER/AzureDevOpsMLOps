@@ -122,6 +122,8 @@ az role assignment create --assignee <service-principal-id> \
   --role Contributor \ 
   --scope /subscriptions/<subscription-id>/resourceGroups/<resource-group>/providers/Microsoft.MachineLearningServices/workspaces/<workspace-name>/computes/<compute-name>
 
+----------------
+
 
 
 
