@@ -48,7 +48,7 @@ jobs:
       run: |
         echo "Running unit tests..."
         # Placez ici votre commande pour lancer les tests (ex : pytest, npm test, etc.)
-        pytest
+         pytest
 
     # Étape 6 : Vérifier le formatage du code (linting)
     - name: Run Code Linter
