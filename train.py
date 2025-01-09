@@ -9,6 +9,7 @@ import mlflow
 import mlflow.sklearn
 import json
 
+
 # define functions
 def main():
     # Load configuration from config.json
@@ -23,10 +24,12 @@ def main():
 
     evaluate_model(model, X_test, y_test)
 
+
 def load_config():
     """Load configuration from the JSON file."""
     with open('config.json', 'r') as config_file:
         return json.load(config_file)
+
 
 def get_csvs_df(path):
     """Read and concatenate all CSV files in the given path."""
@@ -37,6 +40,7 @@ def get_csvs_df(path):
         raise RuntimeError(f"No CSV files found in provided data path: {path}")
     return pd.concat((pd.read_csv(f) for f in csv_files), sort=False)
 
+
 def split_data(df):
     """Split data into training and testing datasets."""
     X = df[['Pregnancies', 'PlasmaGlucose', 'DiastolicBloodPressure', 
@@ -45,10 +49,13 @@ def split_data(df):
     y = df['Diabetic'].values
     return train_test_split(X, y, test_size=0.30, random_state=0)
 
+
 def train_model(reg_rate, X_train, X_test, y_train, y_test):
     """Train a logistic regression model."""
-    model = LogisticRegression(C=1/reg_rate, solver="liblinear").fit(X_train, y_train)
+    model = LogisticRegression(C=1/reg_rate, solver="liblinear") \
+        .fit(X_train, y_train)
     return model
+
 
 def evaluate_model(model, X_test, y_test):
     """Evaluate the model and log metrics."""
@@ -70,6 +77,7 @@ def evaluate_model(model, X_test, y_test):
     plt.title('ROC Curve')
     plt.savefig("roc_curve.png")
     print("ROC curve saved as 'roc_curve.png'")
+
 
 # run script
 if __name__ == "__main__":
